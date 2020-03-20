@@ -15,4 +15,7 @@
     <string name="difficultySettingNormal">Normal</string>
     <string name="difficultySettingHard">Difficile</string>
     <string name="difficultyDialogTitle">Choix de la difficulté</string>
+    <string name="resultTitle">Fin de la série !</string>
+    <string name="restartSerie">Recommencer une série de question</string>
+    <string name="homeText">Retour au menu principal</string>
 </resources>

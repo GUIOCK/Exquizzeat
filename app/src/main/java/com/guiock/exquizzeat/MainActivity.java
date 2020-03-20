@@ -16,14 +16,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     List<RadioButton> buttonList = new ArrayList<>();
     Question question;
-    //Resources res = getResources();
     boolean isQuestionAnswered = false;
+    int correctAnsweredQuestion = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent srcIntent = getIntent();
-        question = Question.getQuestion(srcIntent.getIntExtra("idQuestion",0));
+        correctAnsweredQuestion = srcIntent.getIntExtra("valideAnswersNumber",0);
+        question = QuestionManager.getQuestion(srcIntent.getIntExtra("idQuestion",0));
         buttonList.add((RadioButton)findViewById(R.id.proposition0Radio));
         buttonList.add((RadioButton)findViewById(R.id.proposition1Radio));
         buttonList.add((RadioButton)findViewById(R.id.proposition2Radio));
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button validateButton = findViewById(R.id.ValidateButton);
         validateButton.setText(R.string.validateAnswer);
         TextView questionIndexTextView = findViewById(R.id.indexQuestionTextView);
-        questionIndexTextView.setText(getResources().getString(R.string.questionIndex) + (question.getId() + 1) + " / " + Question.getQuestions().size());
+        questionIndexTextView.setText(getResources().getString(R.string.questionIndex) + (question.getId() + 1) + " / " + QuestionManager.getQuestions().size());
     }
 
     public void resetView(){
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(question.verifyAnswer(button.getText().toString())){
                     answerTextView.setText(R.string.goodAnswer);
                     answerTextView.setTextColor(getResources().getColor(R.color.green_answer));
+                    correctAnsweredQuestion++;
                 } else {
                     answerTextView.setText(R.string.wrongAnswer);
                     answerTextView.setTextColor(getResources().getColor(R.color.red_answer));
@@ -131,11 +134,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void nextQuestion(){
-        /*Intent nextQuestion = new Intent(this, MainActivity.class);
-        nextQuestion.putExtra("idQuestion",question.getNextQuestionIndex());
-        startActivity(nextQuestion);*/
-        question = Question.getQuestion(question.getNextQuestionIndex());
-        resetView();
-        fillQuestionViews();
+        int idNextQuestion = question.getNextQuestionIndex();
+        if(idNextQuestion != -1) {
+            Intent nextQuestion = new Intent(this, MainActivity.class);
+            nextQuestion.putExtra("idQuestion", idNextQuestion);
+            nextQuestion.putExtra("valideAnswersNumber",correctAnsweredQuestion);
+            startActivity(nextQuestion);
+            finish();
+        } else {
+            Intent resultIntent = new Intent(this, ResultActivity.class);
+            resultIntent.putExtra("valideAnswersNumber",correctAnsweredQuestion);
+            startActivity(resultIntent);
+        }
+        /*if(question.getNextQuestionIndex() != -1) {
+            question = Question.getQuestion(question.getNextQuestionIndex());
+            resetView();
+            fillQuestionViews();
+        } else {
+
+        }*/
     }
 }
