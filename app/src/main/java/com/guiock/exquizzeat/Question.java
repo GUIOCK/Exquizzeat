@@ -15,7 +15,6 @@ public class Question {
     private List<String> possibleAnswers;
     private String answer;
     private boolean isVegetable;
-    private static Resources res;
     enum difficulty{
         easy,
         normal,

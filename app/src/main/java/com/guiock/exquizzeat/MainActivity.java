@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent resultIntent = new Intent(this, ResultActivity.class);
             resultIntent.putExtra("valideAnswersNumber",correctAnsweredQuestion);
             startActivity(resultIntent);
+            finish();
         }
         /*if(question.getNextQuestionIndex() != -1) {
             question = Question.getQuestion(question.getNextQuestionIndex());
