@@ -10,7 +10,9 @@ import java.util.List;
 public class QuestionManager {
 
     private static Question.difficulty actualDifficulty;
-    private static List<Question> questionsList;
+
+    //Stock lists from different difficulties to avoid remaking them
+    private static List<Question> questionsList; //actual difficulty list and only accessible list outside of class
     private static List<Question> questionsListNormal;
     private static List<Question> questionsListEasy;
     private static List<Question> questionsListHard;
@@ -22,7 +24,6 @@ public class QuestionManager {
 
     private static void generateList(Question.difficulty difficultyList){
         questionsList = new ArrayList<>();
-        //TODO : corriger la difficultée
         if(difficultyList == Question.difficulty.easy){
             if(questionsListEasy == null){
                 questionsList.add(new Question(
@@ -66,7 +67,7 @@ public class QuestionManager {
                 questionsList.add(new Question(
                         "Poutine",
                         new ArrayList<>(Arrays.asList("Poutine", "Fondue", "Gratin", "Mac & Cheese")),
-                        true,
+                        false,
                         R.drawable.poutine
                 ));
                 questionsListNormal = questionsList;

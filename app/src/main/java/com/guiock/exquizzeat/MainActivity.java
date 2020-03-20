@@ -1,7 +1,6 @@
 package com.guiock.exquizzeat;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,15 +16,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     List<RadioButton> buttonList = new ArrayList<>();
     Question question;
     boolean isQuestionAnswered = false;
-    int correctAnsweredQuestion = 0;
+    int correctAnswersCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //get question's id to load it and count of answers to print it at end of quizz
         Intent srcIntent = getIntent();
-        correctAnsweredQuestion = srcIntent.getIntExtra("valideAnswersNumber",0);
+        correctAnswersCount = srcIntent.getIntExtra("valideAnswersNumber",0);
         question = QuestionManager.getQuestion(srcIntent.getIntExtra("idQuestion",0));
+
         buttonList.add((RadioButton)findViewById(R.id.proposition0Radio));
         buttonList.add((RadioButton)findViewById(R.id.proposition1Radio));
         buttonList.add((RadioButton)findViewById(R.id.proposition2Radio));
@@ -33,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for(RadioButton button : buttonList) {
             button.setOnClickListener(this);
         }
+
         fillQuestionViews();
+
         findViewById(R.id.ValidateButton).setOnClickListener(this);
         findViewById(R.id.questionImageView).setOnClickListener(this);
     }
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //fill dynamic views about question
     public void fillQuestionViews(){
         ImageView img = findViewById(R.id.questionImageView);
         img.setImageResource(question.getImgId());
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //To ensure only one Radio is checked (radio group seems to only allow line or collumns of choice)
     public void setRadioCheck(int id){
         for(RadioButton button : buttonList){
             button.setChecked(false);
@@ -106,8 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         selected.setChecked(true);
     }
 
+    //compare checked radio text with answer, and print appropriate datas (correct answer and if corrected answered)
     public void compareAnswers(){
-        boolean isButtonPressed = false;
+        boolean isButtonPressed = false; //to disable possibility to pass question (can't proceed unless one answer is given)
         for(RadioButton button : buttonList){
             if(button.isChecked()){
                 isButtonPressed = true;
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(question.verifyAnswer(button.getText().toString())){
                     answerTextView.setText(R.string.goodAnswer);
                     answerTextView.setTextColor(getResources().getColor(R.color.green_answer));
-                    correctAnsweredQuestion++;
+                    correctAnswersCount++;
                 } else {
                     answerTextView.setText(R.string.wrongAnswer);
                     answerTextView.setTextColor(getResources().getColor(R.color.red_answer));
@@ -133,17 +140,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //Get next question ID, if -1, the list is ended and the result screen is prompted
     public void nextQuestion(){
         int idNextQuestion = question.getNextQuestionIndex();
         if(idNextQuestion != -1) {
             Intent nextQuestion = new Intent(this, MainActivity.class);
             nextQuestion.putExtra("idQuestion", idNextQuestion);
-            nextQuestion.putExtra("valideAnswersNumber",correctAnsweredQuestion);
+            nextQuestion.putExtra("valideAnswersNumber", correctAnswersCount);
             startActivity(nextQuestion);
             finish();
         } else {
             Intent resultIntent = new Intent(this, ResultActivity.class);
-            resultIntent.putExtra("valideAnswersNumber",correctAnsweredQuestion);
+            resultIntent.putExtra("valideAnswersNumber", correctAnswersCount);
             startActivity(resultIntent);
             finish();
         }

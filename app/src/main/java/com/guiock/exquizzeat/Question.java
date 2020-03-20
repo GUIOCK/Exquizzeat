@@ -1,9 +1,5 @@
 package com.guiock.exquizzeat;
 
-import android.content.res.Resources;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +10,7 @@ public class Question {
     private int imgId;
     private List<String> possibleAnswers;
     private String answer;
-    private boolean isVegetable;
+    private boolean isVegetable; //To differentiate vegetable and dishes (for phrasing), possibility to enum it later for other kind of question (typical location of a dish, etc)
     enum difficulty{
         easy,
         normal,
@@ -45,6 +41,7 @@ public class Question {
         this.id = id;
     }
 
+    //Get next question's ID, if actual question is last of list, return -1
     public int getNextQuestionIndex (){
         if(QuestionManager.getQuestions().size() > this.id + 1){
             return this.id + 1;
