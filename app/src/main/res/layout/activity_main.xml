@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/questionImageView"
+        android:layout_width="323dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionTextView"
+        tools:srcCompat="@drawable/topinambour" />
+
+    <TextView
+        android:id="@+id/questionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/questionLabelVegetable"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indexQuestionTextView"
+        tools:text="Quel est ce légume ?" />
+
+    <RadioButton
+        android:id="@+id/proposition0Radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/questionImageView"
+        app:layout_constraintTop_toBottomOf="@+id/questionImageView"
+        tools:text="Topinambour" />
+
+    <RadioButton
+        android:id="@+id/proposition2Radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/questionImageView"
+        app:layout_constraintTop_toBottomOf="@+id/questionImageView"
+        tools:text="Pomme de terre" />
+
+    <RadioButton
+        android:id="@+id/proposition1Radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/proposition0Radio"
+        app:layout_constraintStart_toStartOf="@+id/questionImageView"
+        app:layout_constraintTop_toBottomOf="@+id/proposition0Radio"
+        tools:text="Patate douce" />
+
+    <RadioButton
+        android:id="@+id/proposition3Radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/questionImageView"
+        app:layout_constraintStart_toStartOf="@+id/proposition2Radio"
+        app:layout_constraintTop_toBottomOf="@+id/proposition2Radio"
+        tools:text="Radis blanc" />
+
+    <Button
+        android:id="@+id/ValidateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/validateAnswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/proposition1Radio"
+        tools:text="Valider !" />
+
+    <TextView
+        android:id="@+id/checkAnswerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ValidateButton"
+        tools:text="Bonne réponse !" />
+
+    <TextView
+        android:id="@+id/indexQuestionTextView"
+        android:layout_width="184dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Question #1/12" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

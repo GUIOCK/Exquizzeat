@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Exquizzeat</string>
+    <string name="questionLabelVegetable">Quel est le nom de ce fruit/légume ?</string>
+    <string name="questionLabelDish">Quel est le nom de ce plat ?</string>
+    <string name="validateAnswer">Valider !</string>
+    <string name="nextQuestion">Passer à la question suivante !</string>
+    <string name="goodAnswer">Bonne réponse !</string>
+    <string name="wrongAnswer">Mauvaise réponse !</string>
+    <string name="questionIndex">Question # </string>
+    <string name="aboutCreator">Créer par : Anthony GUIOCK</string>
+    <string name="creatorMail">contact : anthony.guiock@gmail.com</string>
+    <string name="startQuizz">Commencer le quizz !</string>
+    <string name="about">A propos</string>
+    <string name="difficultySettingEasy">Facile</string>
+    <string name="difficultySettingNormal">Normal</string>
+    <string name="difficultySettingHard">Difficile</string>
+    <string name="difficultyDialogTitle">Choix de la difficulté</string>
+</resources>
